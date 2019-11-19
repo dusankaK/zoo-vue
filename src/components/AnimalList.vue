@@ -32,13 +32,26 @@
             <td>{{ animal.sector ? animal.sector : 'Nepoznat' }}</td>
 
             <td>
-                    <button @click="removeAnimal(key)">Remove Animal</button>
+                <button @click="removeAnimal(key)">Remove Animal</button>
             </td>
              <td v-if="key > 0">
                 <button @click="moveToTop(key)">Move to Top</button>
             </td>
         </tr>
-    </table>    
+    </table>
+
+    <h2>Sectors</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+            </tr>
+            <tr v-for="(sector, key) in sectors" :key="key" >
+                <td>{{ sector }}</td> 
+                <td>
+                    <button @click ="showAnimal(sector)">Show Animal</button>
+                </td>
+            </tr>
+        </table>    
     </div>
 </template>
 
@@ -77,8 +90,17 @@ export default {
         addAnimal(){
             this.animals.push({...this.newAnimal});
             this.newAnimal = {};
-        }
-        
+        },
+
+        showAnimal(sector) {
+            let listOfAnimal = [];
+            this.animals.forEach(function(animal){
+                if(sector == animal.sector){
+                    listOfAnimal.push(` ${animal.species} ${animal.name}`);
+               }
+           })
+           alert(listOfAnimal.toString());
+        }    
 
     }
 

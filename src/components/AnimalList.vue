@@ -3,12 +3,16 @@
         <h1>Animal List</h1>
 
     <form @submit.prevent>
-        <label>Species</label><br>
+        <label>Species</label>
         <input v-model= "newAnimal.species" type="text" placeholder="species"><br>
-        <label>Name</label><br>
+        <label>Name</label>
         <input v-model= "newAnimal.name" type="text" placeholder="name"><br>
-        <label>Date of Birth</label><br>
+        <label>Date of Birth</label>
         <input v-model= "newAnimal.dateOfBirth" type="date"><br>
+        <select v-model="newAnimal.sector">Sectors
+            <option v-for="(sector, key) in sectors" :key="key">{{ sector }}</option>
+
+        </select><br><br>    
         <button @click="addAnimal" type="submit">Add New Animal</button>
 
     </form>    
@@ -18,14 +22,17 @@
             <th>Species</th>
             <th>Name</th>
             <th>Date of Birth</th>
+            <th>Sector</th>
         </tr>
 
         <tr v-for="(animal, key) in animals" :key="key">
             <td>{{ animal.species}}</td>
             <td>{{ animal.name}}</td>
             <td>{{ animal.dateOfBirth ? animal.dateOfBirth : 'Nepoznat' }}</td>
+            <td>{{ animal.sector ? animal.sector : 'Nepoznat' }}</td>
+
             <td>
-                <button @click="removeAnimal(key)">Remove Animal</button>
+                    <button @click="removeAnimal(key)">Remove Animal</button>
             </td>
              <td v-if="key > 0">
                 <button @click="moveToTop(key)">Move to Top</button>
@@ -49,7 +56,8 @@ export default {
                 {species: "Monkey", name: "Mica", dateOfBirth: moment().format("DD-MM-YYYY")},
             ],
 
-            newAnimal: {}
+            newAnimal: {},
+            sectors: ['Cats', 'Dogs', 'Tigers', 'Monkies', 'Lions'],
         }
     },
 

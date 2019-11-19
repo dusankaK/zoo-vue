@@ -16,6 +16,9 @@
             <td>
                 <button @click="removeAnimal(key)">Remove Animal</button>
             </td>
+             <td v-if="key > 0">
+                <button @click="moveToTop(key)">Move to Top</button>
+            </td>
         </tr>
     </table>    
     </div>
@@ -39,7 +42,17 @@ export default {
     methods: {
         removeAnimal(key){
             this.animals.splice(key, 1);
+        },
+
+        moveToTop(key){
+            if (key > 0){
+            let toTop = this.animals[key];       
+            this.animals.splice(key, 1);
+            this.animals.unshift(toTop);    
+            }
         }
+        
+
     }
 
 }

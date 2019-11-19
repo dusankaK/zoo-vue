@@ -2,7 +2,7 @@
     <div>
         <h1>Animal List</h1>
 
-    <table>
+    <table id="animals">
         <tr>
             <th>Species</th>
             <th>Name</th>
@@ -13,6 +13,9 @@
             <td>{{ animal.species}}</td>
             <td>{{ animal.name}}</td>
             <td>{{ animal.dateOfBirth ? animal.dateOfBirth : 'Nepoznat' }}</td>
+            <td>
+                <button @click="removeAnimal(key)">Remove Animal</button>
+            </td>
         </tr>
     </table>    
     </div>
@@ -32,11 +35,19 @@ export default {
                 {species: "Monkey", name: "Mica", dateOfBirth: moment().format("DD-MM-YYYY")},
             ],
         }
+    },
+    methods: {
+        removeAnimal(key){
+            this.animals.splice(key, 1);
+        }
     }
 
 }
 </script>
 
 <style scoped>
-
+    td {
+        border:1px solid black;
+        padding: 3px;
+    }
 </style>
